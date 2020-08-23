@@ -49,7 +49,7 @@ libclang_path = ""
 libclang_handle = C_NULL
 
 # This must be `const` so that we can use it with `ccall()`
-const libclang = "libclang.so.9jl"
+const libclang = "libclang.so.10jl"
 
 
 # Relative path to `libllvm`
@@ -63,7 +63,7 @@ libllvm_path = ""
 libllvm_handle = C_NULL
 
 # This must be `const` so that we can use it with `ccall()`
-const libllvm = "libLLVM-9jl.so"
+const libllvm = "libLLVM-10jl.so"
 
 
 # Relative path to `liblto`
@@ -77,7 +77,7 @@ liblto_path = ""
 liblto_handle = C_NULL
 
 # This must be `const` so that we can use it with `ccall()`
-const liblto = "libLTO.so.9jl"
+const liblto = "libLTO.so.10jl"
 
 
 # Relative path to `llc`
