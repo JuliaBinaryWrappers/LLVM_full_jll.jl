@@ -204,13 +204,16 @@ function opt(f::Function; adjust_PATH::Bool = true, adjust_LIBPATH::Bool = true)
 end
 
 
+# Inform that the wrapper is available for this platform
+wrapper_available = true
+
 """
 Open all libraries
 """
 function __init__()
-    global artifact_dir = abspath(artifact"LLVM_full")
+    # This either calls `@artifact_str()`, or returns a constant string if we're overridden.
+    global artifact_dir = find_artifact_dir()
 
-    # Initialize PATH and LIBPATH environment variable listings
     global PATH_list, LIBPATH_list
     global clang_path = normpath(joinpath(artifact_dir, clang_splitpath...))
 
@@ -219,21 +222,21 @@ function __init__()
 
     # Manually `dlopen()` this right now so that future invocations
     # of `ccall` with its `SONAME` will find this path immediately.
-    global libclang_handle = dlopen(libclang_path)
+    global libclang_handle = dlopen(libclang_path, RTLD_LAZY | RTLD_DEEPBIND)
     push!(LIBPATH_list, dirname(libclang_path))
 
     global libllvm_path = normpath(joinpath(artifact_dir, libllvm_splitpath...))
 
     # Manually `dlopen()` this right now so that future invocations
     # of `ccall` with its `SONAME` will find this path immediately.
-    global libllvm_handle = dlopen(libllvm_path)
+    global libllvm_handle = dlopen(libllvm_path, RTLD_LAZY | RTLD_DEEPBIND)
     push!(LIBPATH_list, dirname(libllvm_path))
 
     global liblto_path = normpath(joinpath(artifact_dir, liblto_splitpath...))
 
     # Manually `dlopen()` this right now so that future invocations
     # of `ccall` with its `SONAME` will find this path immediately.
-    global liblto_handle = dlopen(liblto_path)
+    global liblto_handle = dlopen(liblto_path, RTLD_LAZY | RTLD_DEEPBIND)
     push!(LIBPATH_list, dirname(liblto_path))
 
     global llc_path = normpath(joinpath(artifact_dir, llc_splitpath...))
@@ -256,4 +259,3 @@ function __init__()
 
     
 end  # __init__()
-

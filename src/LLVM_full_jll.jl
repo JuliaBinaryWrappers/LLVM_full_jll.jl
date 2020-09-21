@@ -2,8 +2,8 @@ module LLVM_full_jll
 
 if isdefined(Base, :Experimental) && isdefined(Base.Experimental, Symbol("@optlevel"))
     @eval Base.Experimental.@optlevel 0
-end                    
-                        
+end
+
 if VERSION < v"1.3.0-rc4"
     # We lie a bit in the registry that JLL packages are usable on Julia 1.0-1.2.
     # This is to allow packages that might want to support Julia 1.0 to get the
@@ -25,11 +25,55 @@ end
 using Pkg, Pkg.BinaryPlatforms, Pkg.Artifacts, Libdl
 import Base: UUID
 
+wrapper_available = false
+"""
+    is_available()
+
+Return whether the artifact is available for the current platform.
+"""
+is_available() = wrapper_available
+
 # We put these inter-JLL-package API values here so that they are always defined, even if there
 # is no underlying wrapper held within this JLL package.
 const PATH_list = String[]
 const LIBPATH_list = String[]
 
+# We determine, here, at compile-time, whether our JLL package has been dev'ed and overridden
+override_dir = joinpath(dirname(@__DIR__), "override")
+if isdir(override_dir)
+    function find_artifact_dir()
+        return override_dir
+    end
+else
+    function find_artifact_dir()
+        return artifact"LLVM_full"
+    end
+
+    """
+        dev_jll()
+
+    Check this package out to the dev package directory (usually ~/.julia/dev),
+    copying the artifact over to a local `override` directory, allowing package
+    developers to experiment with a locally-built binary.
+    """
+    function dev_jll()
+        # First, `dev` out the package, but don't effect the current project
+        mktempdir() do temp_env
+            Pkg.activate(temp_env) do
+                Pkg.develop("LLVM_full_jll")
+            end
+        end
+        # Create the override directory
+        override_dir = joinpath(Pkg.devdir(), "LLVM_full_jll", "override")
+        # Copy the current artifact contents into that directory
+        if !isdir(override_dir)
+            cp(artifact"LLVM_full", override_dir)
+        end
+        # Force recompilation of that package, just in case it wasn't dev'ed before
+        touch(joinpath(Pkg.devdir(), "LLVM_full_jll", "src", "LLVM_full_jll.jl"))
+        @info("LLVM_full_ll dev'ed out to /depot/dev/LLVM_full_jll with pre-populated override directory")
+    end
+end
 # Load Artifacts.toml file
 artifacts_toml = joinpath(@__DIR__, "..", "Artifacts.toml")
 
