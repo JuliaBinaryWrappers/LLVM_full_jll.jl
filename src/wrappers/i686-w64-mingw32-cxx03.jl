@@ -14,45 +14,45 @@ function __init__()
     JLLWrappers.@generate_init_header()
     JLLWrappers.@init_executable_product(
         clang,
-        "tools/clang.exe",
+        "tools\\clang.exe",
     )
 
     JLLWrappers.@init_library_product(
         libclang,
-        "bin/libclang.dll",
+        "bin\\libclang.dll",
         RTLD_LAZY | RTLD_DEEPBIND,
     )
 
     JLLWrappers.@init_library_product(
         libllvm,
-        "bin/LLVM.dll",
+        "bin\\LLVM.dll",
         RTLD_LAZY | RTLD_DEEPBIND,
     )
 
     JLLWrappers.@init_library_product(
         liblto,
-        "bin/LTO.dll",
+        "bin\\LTO.dll",
         RTLD_LAZY | RTLD_DEEPBIND,
     )
 
     JLLWrappers.@init_executable_product(
         llc,
-        "tools/llc.exe",
+        "tools\\llc.exe",
     )
 
     JLLWrappers.@init_executable_product(
         llvm_config,
-        "tools/llvm-config.exe",
+        "tools\\llvm-config.exe",
     )
 
     JLLWrappers.@init_executable_product(
         llvm_mca,
-        "tools/llvm-mca.exe",
+        "tools\\llvm-mca.exe",
     )
 
     JLLWrappers.@init_executable_product(
         opt,
-        "tools/opt.exe",
+        "tools\\opt.exe",
     )
 
     JLLWrappers.@generate_init_footer()
