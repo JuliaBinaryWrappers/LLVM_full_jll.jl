@@ -20,19 +20,19 @@ function __init__()
     JLLWrappers.@init_library_product(
         libclang,
         "lib/libclang.so",
-        RTLD_LAZY | RTLD_DEEPBIND,
+        nothing,
     )
 
     JLLWrappers.@init_library_product(
         libllvm,
         "lib/libLLVM.so",
-        RTLD_LAZY | RTLD_DEEPBIND,
+        nothing,
     )
 
     JLLWrappers.@init_library_product(
         liblto,
         "lib/libLTO.so",
-        RTLD_LAZY | RTLD_DEEPBIND,
+        nothing,
     )
 
     JLLWrappers.@init_executable_product(
