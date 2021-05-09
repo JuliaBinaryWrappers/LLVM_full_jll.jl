@@ -4,8 +4,8 @@ export clang, libclang, libllvm, liblto, llc, llvm_config, llvm_mca, opt
 JLLWrappers.@generate_wrapper_header("LLVM_full")
 JLLWrappers.@declare_executable_product(clang)
 JLLWrappers.@declare_library_product(libclang, "libclang.dll")
-JLLWrappers.@declare_library_product(libllvm, "LLVM.dll")
-JLLWrappers.@declare_library_product(liblto, "LTO.dll")
+JLLWrappers.@declare_library_product(libllvm, "libLLVM.dll")
+JLLWrappers.@declare_library_product(liblto, "libLTO.dll")
 JLLWrappers.@declare_executable_product(llc)
 JLLWrappers.@declare_executable_product(llvm_config)
 JLLWrappers.@declare_executable_product(llvm_mca)
@@ -25,13 +25,13 @@ function __init__()
 
     JLLWrappers.@init_library_product(
         libllvm,
-        "bin\\LLVM.dll",
+        "bin\\libLLVM.dll",
         nothing,
     )
 
     JLLWrappers.@init_library_product(
         liblto,
-        "bin\\LTO.dll",
+        "bin\\libLTO.dll",
         nothing,
     )
 

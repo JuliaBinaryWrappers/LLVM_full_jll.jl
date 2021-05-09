@@ -3,9 +3,9 @@ export clang, libclang, libllvm, liblto, llc, llvm_config, llvm_mca, opt
 
 JLLWrappers.@generate_wrapper_header("LLVM_full")
 JLLWrappers.@declare_executable_product(clang)
-JLLWrappers.@declare_library_product(libclang, "libclang.so.11jl")
-JLLWrappers.@declare_library_product(libllvm, "libLLVM-11jl.so")
-JLLWrappers.@declare_library_product(liblto, "libLTO.so.11jl")
+JLLWrappers.@declare_library_product(libclang, "libclang.so.12jl")
+JLLWrappers.@declare_library_product(libllvm, "libLLVM-12jl.so")
+JLLWrappers.@declare_library_product(liblto, "libLTO.so.12jl")
 JLLWrappers.@declare_executable_product(llc)
 JLLWrappers.@declare_executable_product(llvm_config)
 JLLWrappers.@declare_executable_product(llvm_mca)
