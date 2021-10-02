@@ -17,7 +17,7 @@ function __init__()
     JLLWrappers.@generate_init_header()
     JLLWrappers.@init_executable_product(
         clang,
-        "bin/clang",
+        "tools/clang",
     )
 
     JLLWrappers.@init_library_product(
