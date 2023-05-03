@@ -5,7 +5,7 @@ using Zlib_jll
 JLLWrappers.@generate_wrapper_header("LLVM_full")
 JLLWrappers.@declare_library_product(libclang, "libclang.dll")
 JLLWrappers.@declare_library_product(libclang_cpp, "libclang-cpp.dll")
-JLLWrappers.@declare_library_product(libllvm, "libLLVM-14jl.dll")
+JLLWrappers.@declare_library_product(libllvm, "libLLVM-15jl.dll")
 JLLWrappers.@declare_library_product(liblto, "libLTO.dll")
 JLLWrappers.@declare_library_product(mlir, "libMLIR.dll")
 JLLWrappers.@declare_library_product(mlir_c, "libMLIR-C.dll")
@@ -32,7 +32,7 @@ function __init__()
 
     JLLWrappers.@init_library_product(
         libllvm,
-        "bin\\libLLVM-14jl.dll",
+        "bin\\libLLVM-15jl.dll",
         nothing,
     )
 
