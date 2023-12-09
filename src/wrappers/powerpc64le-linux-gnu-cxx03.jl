@@ -3,12 +3,12 @@ export clang, dsymutil, libclang, libclang_cpp, libllvm, liblto, llc, lld, llvm_
 
 using Zlib_jll
 JLLWrappers.@generate_wrapper_header("LLVM_full")
-JLLWrappers.@declare_library_product(libclang, "libclang.so.15")
-JLLWrappers.@declare_library_product(libclang_cpp, "libclang-cpp.so.15jl")
-JLLWrappers.@declare_library_product(libllvm, "libLLVM-15jl.so")
-JLLWrappers.@declare_library_product(liblto, "libLTO.so.15jl")
-JLLWrappers.@declare_library_product(mlir, "libMLIR.so.15jl")
-JLLWrappers.@declare_library_product(mlir_c, "libMLIR-C.so.15jl")
+JLLWrappers.@declare_library_product(libclang, "libclang.so.16jl")
+JLLWrappers.@declare_library_product(libclang_cpp, "libclang-cpp.so.16jl")
+JLLWrappers.@declare_library_product(libllvm, "libLLVM-16jl.so")
+JLLWrappers.@declare_library_product(liblto, "libLTO.so.16jl")
+JLLWrappers.@declare_library_product(mlir, "libMLIR.so.16jl")
+JLLWrappers.@declare_library_product(mlir_c, "libMLIR-C.so.16jl")
 JLLWrappers.@declare_executable_product(clang)
 JLLWrappers.@declare_executable_product(dsymutil)
 JLLWrappers.@declare_executable_product(llc)
@@ -32,7 +32,7 @@ function __init__()
 
     JLLWrappers.@init_library_product(
         libllvm,
-        "lib/libLLVM-15jl.so",
+        "lib/libLLVM-16jl.so",
         nothing,
     )
 
