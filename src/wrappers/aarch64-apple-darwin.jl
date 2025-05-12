@@ -32,7 +32,7 @@ function __init__()
 
     JLLWrappers.@init_library_product(
         libllvm,
-        "lib/libLLVM-20jl.dylib",
+        "lib/libLLVM-19jl.dylib",
         nothing,
     )
 
