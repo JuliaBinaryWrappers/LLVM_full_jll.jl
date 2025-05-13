@@ -2,6 +2,7 @@
 export clang, dsymutil, libclang, libclang_cpp, libllvm, liblto, llc, lld, llvm_config, llvm_mca, mlir, mlir_c, opt
 
 using Zlib_jll
+using Zstd_jll
 JLLWrappers.@generate_wrapper_header("LLVM_full")
 JLLWrappers.@declare_library_product(libclang, "@rpath/libclang.dylib")
 JLLWrappers.@declare_library_product(libclang_cpp, "@rpath/libclang-cpp.dylib")
@@ -17,7 +18,7 @@ JLLWrappers.@declare_executable_product(llvm_config)
 JLLWrappers.@declare_executable_product(llvm_mca)
 JLLWrappers.@declare_executable_product(opt)
 function __init__()
-    JLLWrappers.@generate_init_header(Zlib_jll)
+    JLLWrappers.@generate_init_header(Zlib_jll, Zstd_jll)
     JLLWrappers.@init_library_product(
         libclang,
         "lib/libclang.dylib",
@@ -32,7 +33,7 @@ function __init__()
 
     JLLWrappers.@init_library_product(
         libllvm,
-        "lib/libLLVM-18jl.dylib",
+        "lib/libLLVM-20jl.dylib",
         nothing,
     )
 
