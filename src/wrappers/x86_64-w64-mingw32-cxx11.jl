@@ -2,10 +2,11 @@
 export clang, dsymutil, libclang, libclang_cpp, libllvm, liblto, llc, lld, llvm_config, llvm_mca, mlir, mlir_c, opt
 
 using Zlib_jll
+using Zstd_jll
 JLLWrappers.@generate_wrapper_header("LLVM_full")
 JLLWrappers.@declare_library_product(libclang, "libclang.dll")
 JLLWrappers.@declare_library_product(libclang_cpp, "libclang-cpp.dll")
-JLLWrappers.@declare_library_product(libllvm, "libLLVM-16jl.dll")
+JLLWrappers.@declare_library_product(libllvm, "libLLVM-21jl.dll")
 JLLWrappers.@declare_library_product(liblto, "libLTO.dll")
 JLLWrappers.@declare_library_product(mlir, "libMLIR.dll")
 JLLWrappers.@declare_library_product(mlir_c, "libMLIR-C.dll")
@@ -17,7 +18,7 @@ JLLWrappers.@declare_executable_product(llvm_config)
 JLLWrappers.@declare_executable_product(llvm_mca)
 JLLWrappers.@declare_executable_product(opt)
 function __init__()
-    JLLWrappers.@generate_init_header(Zlib_jll)
+    JLLWrappers.@generate_init_header(Zlib_jll, Zstd_jll)
     JLLWrappers.@init_library_product(
         libclang,
         "bin\\libclang.dll",
@@ -32,7 +33,7 @@ function __init__()
 
     JLLWrappers.@init_library_product(
         libllvm,
-        "bin\\libLLVM-16jl.dll",
+        "bin\\libLLVM-21jl.dll",
         nothing,
     )
 
