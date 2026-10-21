@@ -5,18 +5,18 @@ using Zlib_jll
 using Zstd_jll
 JLLWrappers.@generate_wrapper_header("LLVM_full")
 JLLWrappers.@declare_library_product(libclang, "@rpath/libclang.dylib")
-JLLWrappers.@declare_library_product(libclang_cpp, "@rpath/libclang-cpp.23.1jl.dylib")
-JLLWrappers.@declare_library_product(libllvm, "@rpath/libLLVM.23.1jl.dylib")
 JLLWrappers.@declare_library_product(liblto, "@rpath/libLTO.dylib")
+JLLWrappers.@declare_executable_product(llvm_config)
+JLLWrappers.@declare_executable_product(clang)
+JLLWrappers.@declare_executable_product(opt)
+JLLWrappers.@declare_executable_product(llc)
+JLLWrappers.@declare_library_product(libllvm, "@rpath/libLLVM.23.1jl.dylib")
+JLLWrappers.@declare_executable_product(llvm_mca)
 JLLWrappers.@declare_library_product(mlir, "@rpath/libMLIR.23.1jl.dylib")
 JLLWrappers.@declare_library_product(mlir_c, "@rpath/libMLIR-C.23.1jl.dylib")
-JLLWrappers.@declare_executable_product(clang)
-JLLWrappers.@declare_executable_product(dsymutil)
-JLLWrappers.@declare_executable_product(llc)
+JLLWrappers.@declare_library_product(libclang_cpp, "@rpath/libclang-cpp.23.1jl.dylib")
 JLLWrappers.@declare_executable_product(lld)
-JLLWrappers.@declare_executable_product(llvm_config)
-JLLWrappers.@declare_executable_product(llvm_mca)
-JLLWrappers.@declare_executable_product(opt)
+JLLWrappers.@declare_executable_product(dsymutil)
 function __init__()
     JLLWrappers.@generate_init_header(Zlib_jll, Zstd_jll)
     JLLWrappers.@init_library_product(
@@ -26,9 +26,29 @@ function __init__()
     )
 
     JLLWrappers.@init_library_product(
-        libclang_cpp,
-        "lib/libclang-cpp.dylib",
+        liblto,
+        "lib/libLTO.dylib",
         nothing,
+    )
+
+    JLLWrappers.@init_executable_product(
+        llvm_config,
+        "tools/llvm-config",
+    )
+
+    JLLWrappers.@init_executable_product(
+        clang,
+        "tools/clang",
+    )
+
+    JLLWrappers.@init_executable_product(
+        opt,
+        "tools/opt",
+    )
+
+    JLLWrappers.@init_executable_product(
+        llc,
+        "tools/llc",
     )
 
     JLLWrappers.@init_library_product(
@@ -37,10 +57,9 @@ function __init__()
         nothing,
     )
 
-    JLLWrappers.@init_library_product(
-        liblto,
-        "lib/libLTO.dylib",
-        nothing,
+    JLLWrappers.@init_executable_product(
+        llvm_mca,
+        "tools/llvm-mca",
     )
 
     JLLWrappers.@init_library_product(
@@ -55,19 +74,10 @@ function __init__()
         nothing,
     )
 
-    JLLWrappers.@init_executable_product(
-        clang,
-        "tools/clang",
-    )
-
-    JLLWrappers.@init_executable_product(
-        dsymutil,
-        "tools/dsymutil",
-    )
-
-    JLLWrappers.@init_executable_product(
-        llc,
-        "tools/llc",
+    JLLWrappers.@init_library_product(
+        libclang_cpp,
+        "lib/libclang-cpp.dylib",
+        nothing,
     )
 
     JLLWrappers.@init_executable_product(
@@ -76,18 +86,8 @@ function __init__()
     )
 
     JLLWrappers.@init_executable_product(
-        llvm_config,
-        "tools/llvm-config",
-    )
-
-    JLLWrappers.@init_executable_product(
-        llvm_mca,
-        "tools/llvm-mca",
-    )
-
-    JLLWrappers.@init_executable_product(
-        opt,
-        "tools/opt",
+        dsymutil,
+        "tools/dsymutil",
     )
 
     JLLWrappers.@generate_init_footer()
